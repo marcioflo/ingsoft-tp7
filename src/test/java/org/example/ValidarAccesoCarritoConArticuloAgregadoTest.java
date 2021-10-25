@@ -42,9 +42,9 @@ public class ValidarAccesoCarritoConArticuloAgregadoTest {
   }
   @Test
   public void vaAccesoCarritoConArticuloAgregado() {
-    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);// espera 15 segundos en caso de que algo no se haya cargado al instante de necesitarlo
+    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     driver.get("https://www.vaypol.com.ar/");
-    driver.manage().window().setSize(new Dimension(1936, 1056));
+    driver.manage().window().setSize(new Dimension(1089, 901));
     driver.findElement(By.cssSelector(".navbaritem_wrapper__DGwCq:nth-child(2) .navbaritem_icon__3hNI6")).click();
     {
       WebElement element = driver.findElement(By.linkText("Remeras"));
@@ -52,14 +52,14 @@ public class ValidarAccesoCarritoConArticuloAgregadoTest {
       builder.moveToElement(element).perform();
     }
     driver.findElement(By.linkText("Camisetas")).click();
+    js.executeScript("window.scrollTo(0,208)");
     driver.findElement(By.cssSelector(".product-item_container__3w84l:nth-child(1) .product-item_imageWrapper__G5Rsl")).click();
+    js.executeScript("window.scrollTo(0,0)");
+    js.executeScript("window.scrollTo(0,295)");
     driver.findElement(By.cssSelector(".size-item_item__1SnRA:nth-child(3)")).click();
     driver.findElement(By.cssSelector(".product_button__1wFyQ")).click();
-    js.executeScript("window.scrollTo(0,192)");
+    js.executeScript("window.scrollTo(0,298)");
     driver.findElement(By.cssSelector(".button_secondary__KDKID")).click();
-    //WebElement element1 = driver.findElement(By.className("checkout-button_quantity__27d_M"));
-    //Assertions.assertEquals("Productos en carrito\n1 producto", element1.getText());
-    assertThat(driver.findElement(By.className("checkout-button_quantity__27d_M")).
-            getText(), is("Productos en carrito\n1 producto"));
+    assertThat(driver.findElement(By.xpath("//div/span/span")).getText(), is("Productos en carrito"));
   }
 }
